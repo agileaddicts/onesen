@@ -1,0 +1,9 @@
+version: "3.1"
+services:
+  postgres:
+    container_name: onesen-postgres
+    image: postgres:15.5-bullseye
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
