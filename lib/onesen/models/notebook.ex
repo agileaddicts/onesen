@@ -11,6 +11,10 @@ defmodule Onesen.Models.Notebook do
     timestamps(type: :utc_datetime)
   end
 
+  def get!(identifier) do
+    Repo.get_by!(Notebook, identifier: identifier)
+  end
+
   def create! do
     %Notebook{}
     |> changeset(%{identifier: Ecto.UUID.generate()})

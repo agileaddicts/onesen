@@ -9,6 +9,7 @@ defmodule OnesenWeb.NotebookController do
   end
 
   def show(conn, %{"identifier" => identifier}) do
-    render(conn, :show)
+    notebook = Notebook.get!(identifier)
+    render(conn, :show, notebook: notebook)
   end
 end
