@@ -18,6 +18,11 @@ defmodule OnesenWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    scope "/n" do
+      post "/", NotebookController, :create
+      get "/:identifier", NotebookController, :show
+    end
   end
 
   # Other scopes may use custom stacks.
