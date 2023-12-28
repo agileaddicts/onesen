@@ -7,9 +7,4 @@ defmodule OnesenWeb.NotebookController do
 
     redirect(conn, to: ~p"/n/#{notebook.identifier}")
   end
-
-  def show(conn, %{"identifier" => identifier}) do
-    notebook = Notebook.get!(identifier)
-    render(conn, :show, page_title: "Notebook", notebook: notebook)
-  end
 end

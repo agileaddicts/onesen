@@ -21,7 +21,7 @@ defmodule OnesenWeb.Router do
 
     scope "/n" do
       post "/", NotebookController, :create
-      get "/:identifier", NotebookController, :show
+      live "/:identifier", Live.NotebookLive.Show, :show
     end
   end
 
