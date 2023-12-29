@@ -6,6 +6,8 @@
   <%= @page.date %>
 </h3>
 
-<p>
-  <%= @page.content %>
-</p>
+<form phx-change="change" phx-submit="submit">
+  <textarea name="content">
+    <%= @page.content %>
+  </textarea>
+</form>

@@ -38,4 +38,28 @@ defmodule Onesen.Test.Models.PageTest do
       assert %Page{} = Page.create!(notebook)
     end
   end
+
+  describe "update_content!/1" do
+    test "updates content for page" do
+      notebook = Notebook.create!()
+      page = Page.create!(notebook)
+
+      Page.update_content!(page, "Lorem ipsum")
+
+      loaded_page = Page.get!(page.identifier)
+
+      assert loaded_page.content == "Lorem ipsum"
+    end
+
+    test "updates content and trims it for page" do
+      notebook = Notebook.create!()
+      page = Page.create!(notebook)
+
+      Page.update_content!(page, "   Lorem ipsum   ")
+
+      loaded_page = Page.get!(page.identifier)
+
+      assert loaded_page.content == "Lorem ipsum"
+    end
+  end
 end

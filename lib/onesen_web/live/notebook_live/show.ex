@@ -25,4 +25,11 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
      |> assign(:notebook, notebook)
      |> assign(:page, page)}
   end
+
+  @impl true
+  def handle_event("change", %{"content" => content}, socket) do
+    page = Page.update_content!(socket.assigns.page, content)
+
+    {:noreply, socket |> assign(:page, page)}
+  end
 end

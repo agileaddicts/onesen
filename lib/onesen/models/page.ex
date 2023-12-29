@@ -35,6 +35,12 @@ defmodule Onesen.Models.Page do
     |> Repo.insert!()
   end
 
+  def update_content!(page, content) do
+    page
+    |> changeset(%{content: String.trim(content)})
+    |> Repo.update!()
+  end
+
   @doc false
   defp changeset(page, attrs) do
     page
