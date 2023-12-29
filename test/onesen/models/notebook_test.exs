@@ -6,7 +6,8 @@ defmodule Onesen.Test.Models.NotebookTest do
   describe "get!/1" do
     test "returns notebook" do
       notebook = Notebook.create!()
-      assert notebook == Notebook.get!(notebook.identifier)
+      loaded_notebook = Notebook.get!(notebook.identifier)
+      assert notebook.id == loaded_notebook.id
     end
   end
 

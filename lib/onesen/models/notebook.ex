@@ -3,10 +3,13 @@ defmodule Onesen.Models.Notebook do
   import Ecto.Changeset
 
   alias Onesen.Models.Notebook
+  alias Onesen.Models.Page
   alias Onesen.Repo
 
   schema "notebooks" do
     field :identifier, Ecto.UUID
+
+    has_many :pages, Page
 
     timestamps(type: :utc_datetime)
   end
