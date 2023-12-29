@@ -20,6 +20,10 @@ defmodule Onesen.Models.Page do
     Repo.get_by!(Page, identifier: identifier)
   end
 
+  def get_today(notebook) do
+    Repo.get_by(Page, notebook_id: notebook.id, date: Date.utc_today())
+  end
+
   def create!(notebook) do
     %Page{}
     |> changeset(%{
