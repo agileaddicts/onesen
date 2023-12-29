@@ -1,0 +1,58 @@
+name: Continous Integration / Continous Deployment
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+env:
+  ELIXIR_VERSION: "1.16.0"
+  OTP_VERSION: "26.2"
+
+jobs:
+  test:
+    name: Test elixir app
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
+    services:
+      db:
+        env:
+          POSTGRES_PASSWORD: postgres
+        image: postgres:13
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports: ["5432:5432"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup erlang & elixir
+        id: beam
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+      - name: Retrieve cache
+        uses: actions/cache@v3
+        id: mix-cache
+        with:
+          path: |
+            deps
+            _build
+            priv/plts
+          key: ${{ runner.os }}-mix-${{ steps.beam.outputs.otp-version }}-${{ steps.beam.outputs.elixir-version }}-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+      - name: Download dependencies
+        run: mix deps.get
+      - name: Compile code
+        run: mix compile --all-warnings --warnings-as-errors
+      - name: Check retired dependencies
+        run: mix hex.audit
+      - name: Check code formatting
+        run: mix format --check-formatted
