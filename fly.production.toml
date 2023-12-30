@@ -1,4 +1,9 @@
-app = "onesen-staging"
+# fly.toml app configuration file generated for onesen-production on 2023-12-30T10:45:52+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "onesen-production"
 primary_region = "ams"
 kill_signal = "SIGTERM"
 
@@ -8,7 +13,7 @@ kill_signal = "SIGTERM"
   release_command = "/app/bin/migrate"
 
 [env]
-  PHX_HOST = "onesen-staging.fly.dev"
+  PHX_HOST = "onesen-production.fly.dev"
   PORT = "8080"
 
 [http_service]
@@ -26,4 +31,4 @@ kill_signal = "SIGTERM"
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
-  memory_mb = 256
+  memory_mb = 1024
