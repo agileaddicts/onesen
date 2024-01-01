@@ -85,5 +85,5 @@ jobs:
           fetch-depth: 0
       - name: Setup flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: Deploy app to staging
+      - name: Deploy app to production
         run: flyctl deploy --remote-only --config ./fly.production.toml
