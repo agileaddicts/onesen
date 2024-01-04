@@ -25,7 +25,7 @@ config :onesen, OnesenWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "WOBMMyZVKUzYhHAOQmkZSi2qtTYa4nn+paLENgiHxQ6v42iD/sQrtDwksKFfPRy+",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    bun: {Bun, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
