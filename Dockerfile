@@ -52,6 +52,8 @@ COPY lib lib
 COPY assets assets
 
 # compile assets
+RUN mix assets.setup
+RUN _build/bun install
 RUN mix assets.deploy
 
 # Compile the release
