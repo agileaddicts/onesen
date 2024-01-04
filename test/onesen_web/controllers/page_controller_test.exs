@@ -3,6 +3,6 @@ defmodule OnesenWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "1sen"
+    assert html_response(conn, 200) =~ "OneSen"
   end
 end
