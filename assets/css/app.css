@@ -3,3 +3,19 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+#notebook-form .saved-badge {
+  display: inline-block;
+}
+
+#notebook-form .loading-badge {
+  display: none;
+}
+
+#notebook-form.phx-change-loading .saved-badge {
+  display: none;
+}
+
+#notebook-form.phx-change-loading .loading-badge {
+  display: inline-block;
+}
