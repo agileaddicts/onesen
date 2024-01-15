@@ -8,6 +8,7 @@ defmodule Onesen.Models.Notebook do
 
   schema "notebooks" do
     field :identifier, Ecto.UUID
+    field :name, :string
 
     has_many :pages, Page
 
@@ -24,10 +25,16 @@ defmodule Onesen.Models.Notebook do
     |> Repo.insert!()
   end
 
+  def update_name!(notebook, name) do
+    notebook
+    |> changeset(%{name: name})
+    |> Repo.update!()
+  end
+
   @doc false
   defp changeset(notebook, attrs) do
     notebook
-    |> cast(attrs, [:identifier])
+    |> cast(attrs, [:identifier, :name])
     |> validate_required([:identifier])
   end
 end

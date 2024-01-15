@@ -27,9 +27,26 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
   end
 
   @impl true
-  def handle_event("change", %{"content" => content}, socket) do
+  def handle_event("update-notebook-name", %{"name" => name}, socket) do
+    notebook = Notebook.update_name!(socket.assigns.notebook, name)
+
+    {:noreply, socket |> assign(notebook: notebook)}
+  end
+
+  @impl true
+  def handle_event("save-notebook-name", %{"name" => name}, socket) do
+    notebook = Notebook.update_name!(socket.assigns.notebook, name)
+
+    {:noreply, socket |> assign(notebook: notebook)}
+  end
+
+  @impl true
+  def handle_event("update-content", %{"content" => content}, socket) do
     page = Page.update_content!(socket.assigns.page, content)
 
     {:noreply, socket |> assign(:page, page)}
   end
+
+  defp get_notebook_name(%{name: nil} = notebook), do: "Notebook #{notebook.id}"
+  defp get_notebook_name(notebook), do: notebook.name
 end
