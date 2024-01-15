@@ -21,18 +21,9 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
 
     {:noreply,
      socket
-     |> assign(:state, :default)
      |> assign(:page_title, "Your notebook")
      |> assign(:notebook, notebook)
      |> assign(:page, page)}
-  end
-
-  def handle_event("state-default", _params, socket) do
-    {:noreply, socket |> assign(:state, :default)}
-  end
-
-  def handle_event("state-edit-name", _params, socket) do
-    {:noreply, socket |> assign(:state, :edit_name)}
   end
 
   @impl true
@@ -46,7 +37,7 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
   def handle_event("save-notebook-name", %{"name" => name}, socket) do
     notebook = Notebook.update_name!(socket.assigns.notebook, name)
 
-    {:noreply, socket |> assign(notebook: notebook, state: :default)}
+    {:noreply, socket |> assign(notebook: notebook)}
   end
 
   @impl true

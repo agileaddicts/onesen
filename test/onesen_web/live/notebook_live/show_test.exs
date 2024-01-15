@@ -32,10 +32,6 @@ defmodule OnesenWeb.NotebookLiveTest do
   test "updates title of notebook", %{conn: conn, notebook: notebook} do
     {:ok, view, _html} = live(conn, ~p"/n/#{notebook.identifier}")
 
-    view
-    |> element("h2")
-    |> render_click()
-
     assert view
            |> element("form#update-notebook-name-form")
            |> render_change(%{name: "Test NB 1"}) =~ "Test NB 1"
