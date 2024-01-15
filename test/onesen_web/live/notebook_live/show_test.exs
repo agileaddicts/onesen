@@ -22,10 +22,25 @@ defmodule OnesenWeb.NotebookLiveTest do
     {:ok, view, _html} = live(conn, ~p"/n/#{notebook.identifier}")
 
     assert view
-           |> element("form")
+           |> element("form#update-content-form")
            |> render_change(%{content: "Lorem ipsum"}) =~ "Lorem ipsum"
 
     loaded_page = Page.get_today(notebook)
     assert loaded_page.content == "Lorem ipsum"
+  end
+
+  test "updates title of notebook", %{conn: conn, notebook: notebook} do
+    {:ok, view, _html} = live(conn, ~p"/n/#{notebook.identifier}")
+
+    view
+    |> element("h2")
+    |> render_click()
+
+    assert view
+           |> element("form#update-notebook-name-form")
+           |> render_change(%{name: "Test NB 1"}) =~ "Test NB 1"
+
+    loaded_notebook = Notebook.get!(notebook.identifier)
+    assert loaded_notebook.name == "Test NB 1"
   end
 end

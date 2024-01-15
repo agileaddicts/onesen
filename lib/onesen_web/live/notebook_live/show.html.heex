@@ -2,6 +2,7 @@
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <form
       :if={@state == :edit_name}
+      id="update-notebook-name-form"
       phx-change="update-notebook-name"
       phx-submit="save-notebook-name"
       phx-click-away="state-default"
@@ -20,7 +21,7 @@
       Date: <%= @page.date %>
     </h3>
 
-    <form id="notebook-form" phx-change="update-content" phx-submit="update-content">
+    <form id="update-content-form" phx-change="update-content" phx-submit="update-content">
       <label for="content" class="block text-sm font-medium leading-6 text-gray-900">
         Your note
       </label>
