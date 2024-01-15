@@ -1,14 +1,26 @@
 <div class="py-6 sm:py-8">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <h2 class="text-3xl font-bold tracking-tight text-jet sm:text-4xl pb-6">
-      Notebook <%= @notebook.id %>
+    <form
+      :if={@state == :edit_name}
+      phx-change="update-notebook-name"
+      phx-submit="save-notebook-name"
+      phx-click-away="state-default"
+    >
+      <.input type="text" value={get_notebook_name(@notebook)} name="name" phx-debounce="250" />
+    </form>
+    <h2
+      :if={@state == :default}
+      class="text-3xl font-bold tracking-tight text-jet sm:text-4xl pb-6"
+      phx-click="state-edit-name"
+    >
+      <%= get_notebook_name(@notebook) %>
     </h2>
 
     <h3 class="text-xl tracking-tight text-jet sm:text-2xl pb-4">
       Date: <%= @page.date %>
     </h3>
 
-    <form id="notebook-form" phx-change="change" phx-submit="submit">
+    <form id="notebook-form" phx-change="update-content" phx-submit="update-content">
       <label for="content" class="block text-sm font-medium leading-6 text-gray-900">
         Your note
       </label>
