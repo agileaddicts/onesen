@@ -19,7 +19,12 @@
       Date: <%= @page.date %>
     </h3>
 
-    <form id="update-content-form" phx-change="update-content" phx-submit="update-content">
+    <form
+      id="update-content-form"
+      phx-change="update-content"
+      phx-submit="update-content"
+      class="pb-6"
+    >
       <label for="content" class="block text-sm font-medium leading-6 text-gray-900">
         Your note
       </label>
@@ -37,5 +42,9 @@
         Saving...
       </span>
     </form>
+
+    <p class="text-md text-jet sm:text-lg">
+      Save the URL to return tomorrow and add another note!
+    </p>
   </div>
 </div>
