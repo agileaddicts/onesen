@@ -30,13 +30,13 @@ defmodule Onesen.Models.Notebook do
     |> Repo.insert!()
   end
 
-  def update_name!(notebook, name) do
+  def update_name!(%Notebook{} = notebook, name) do
     notebook
     |> changeset(%{name: name})
     |> Repo.update!()
   end
 
-  def update_user!(%{user_id: nil} = notebook, user) do
+  def update_user!(%Notebook{user_id: nil} = notebook, user) do
     notebook
     |> Repo.preload(:user)
     |> changeset(%{})
@@ -49,7 +49,7 @@ defmodule Onesen.Models.Notebook do
   end
 
   @doc false
-  defp changeset(notebook, attrs) do
+  defp changeset(%Notebook{} = notebook, attrs) do
     notebook
     |> cast(attrs, [:identifier, :name])
     |> validate_required([:identifier])

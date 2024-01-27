@@ -22,7 +22,7 @@ defmodule Onesen.Models.User do
   end
 
   @doc false
-  defp changeset(user, attrs) do
+  defp changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:identifier, :email])
     |> validate_required([:identifier, :email])
