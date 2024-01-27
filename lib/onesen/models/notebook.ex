@@ -19,7 +19,9 @@ defmodule Onesen.Models.Notebook do
   end
 
   def get!(identifier) do
-    Repo.get_by!(Notebook, identifier: identifier)
+    Notebook
+    |> Repo.get_by!(identifier: identifier)
+    |> Repo.preload(:user)
   end
 
   def create! do
@@ -32,6 +34,18 @@ defmodule Onesen.Models.Notebook do
     notebook
     |> changeset(%{name: name})
     |> Repo.update!()
+  end
+
+  def update_user!(%{user_id: nil} = notebook, user) do
+    notebook
+    |> Repo.preload(:user)
+    |> changeset(%{})
+    |> put_assoc(:user, user)
+    |> Repo.update!()
+  end
+
+  def update_user!(_notebook, _user) do
+    raise Ecto.ChangeError, message: "Cannot update user for a notebook"
   end
 
   @doc false
