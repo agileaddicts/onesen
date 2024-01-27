@@ -37,6 +37,16 @@ defmodule Onesen.Test.Models.PageTest do
 
       assert %Page{} = Page.create!(notebook)
     end
+
+    test "fails if notebook already has a page for today" do
+      notebook = Notebook.create!()
+
+      Page.create!(notebook)
+
+      assert_raise Ecto.InvalidChangesetError, fn ->
+        Page.create!(notebook)
+      end
+    end
   end
 
   describe "update_content!/1" do

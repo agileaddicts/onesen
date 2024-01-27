@@ -39,5 +39,6 @@ defmodule Onesen.Models.Notebook do
     notebook
     |> cast(attrs, [:identifier, :name])
     |> validate_required([:identifier])
+    |> unique_constraint(:identifier)
   end
 end

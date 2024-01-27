@@ -46,5 +46,7 @@ defmodule Onesen.Models.Page do
     page
     |> cast(attrs, [:identifier, :date, :content])
     |> validate_required([:identifier, :date])
+    |> unique_constraint(:identifier)
+    |> unique_constraint([:date, :notebook_id])
   end
 end
