@@ -4,11 +4,14 @@ defmodule Onesen.Models.Notebook do
 
   alias Onesen.Models.Notebook
   alias Onesen.Models.Page
+  alias Onesen.Models.User
   alias Onesen.Repo
 
   schema "notebooks" do
     field :identifier, Ecto.UUID
     field :name, :string
+
+    belongs_to :user, User
 
     has_many :pages, Page
 
