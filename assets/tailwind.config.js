@@ -15,14 +15,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        // https://coolors.co/e6e6e6-39393a-e77728-008148-ba324f
-        platinum: "#E6E6E6",
-        jet: "#39393A",
-        pumpkin: "#E77728",
-        seagreen: "#008148",
-        rosered: "#BA324F"
-      },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       }

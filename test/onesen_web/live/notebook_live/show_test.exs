@@ -29,6 +29,15 @@ defmodule OnesenWeb.NotebookLiveTest do
     assert loaded_page.content == "Lorem ipsum"
   end
 
+  test "displays content in notebook", %{conn: conn, notebook: notebook} do
+    page = Page.create!(notebook)
+    Page.update_content!(page, "Lorem ipsum")
+
+    {:ok, _view, html} = live(conn, ~p"/n/#{notebook.identifier}")
+
+    assert html =~ "Lorem ipsum"
+  end
+
   test "updates title of notebook", %{conn: conn, notebook: notebook} do
     {:ok, view, _html} = live(conn, ~p"/n/#{notebook.identifier}")
 
@@ -38,5 +47,12 @@ defmodule OnesenWeb.NotebookLiveTest do
 
     loaded_notebook = Notebook.get!(notebook.identifier)
     assert loaded_notebook.name == "Test NB 1"
+  end
+
+  test "displays title of notebook", %{conn: conn, notebook: notebook} do
+    Notebook.update_name!(notebook, "Test NB 1")
+    {:ok, _view, html} = live(conn, ~p"/n/#{notebook.identifier}")
+
+    assert html =~ "Test NB 1"
   end
 end
