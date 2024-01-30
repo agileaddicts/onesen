@@ -1,4 +1,4 @@
-<div class="py-6 sm:py-8">
+<div class="">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <form
       id="update-notebook-name-form"
@@ -11,11 +11,11 @@
         value={get_notebook_name(@notebook)}
         name="name"
         phx-debounce="250"
-        class="text-3xl font-bold tracking-tight text-jet sm:text-4xl p-0 border-0"
+        class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl p-0 border-0"
       />
     </form>
 
-    <h3 class="text-xl tracking-tight text-jet sm:text-2xl pb-4">
+    <h3 class="text-xl tracking-tight text-gray-700 sm:text-2xl pb-4">
       Date: <%= @page.date %>
     </h3>
 
@@ -32,19 +32,45 @@
         name="content"
         id="content"
         rows="4"
-        class="block w-full sm:w-1/2 rounded-md border-0 py-1.5 text-jet shadow-sm ring-1 ring-inset ring-platinum focus:ring-2 focus:ring-inset focus:ring-pumpkin sm:text-sm sm:leading-6"
+        class="block w-full rounded-md sm:w-1/2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
         phx-debounce="500"
       ><%= @page.content %></textarea>
-      <span class="saved-badge inline-flex items-center rounded-md bg-seagreen/10 mt-2 px-2 py-1 text-xs font-medium text-seagreen ring-1 ring-inset ring-seagreen/20">
+      <span
+        id="saved-badge"
+        class="inline-flex items-center rounded-md bg-green-50 mt-2 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+      >
         Content saved
       </span>
-      <span class="loading-badge inline-flex items-center rounded-md bg-pumpkin/10 mt-2 px-2 py-1 text-xs font-medium text-pumpkin ring-1 ring-inset ring-pumpkin/20">
+      <span
+        id="loading-badge"
+        class="inline-flex items-center rounded-md bg-yellow-50 mt-2 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20"
+      >
         Saving...
       </span>
     </form>
 
-    <p class="text-md text-jet sm:text-lg">
-      Save the URL to return tomorrow and add another note!
-    </p>
+    <div class="w-full sm:w-1/2 rounded-md bg-blue-50 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg
+            class="h-5 w-5 text-blue-400"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <div class="ml-3 flex-1 md:flex md:justify-between">
+          <p class="text-sm text-blue-700">
+            Save this URL to return tomorrow and add another note!
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

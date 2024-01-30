@@ -20,11 +20,11 @@ defmodule Onesen.Models.Page do
     Repo.get_by!(Page, identifier: identifier)
   end
 
-  def get_today(notebook) do
+  def get_today(%Notebook{} = notebook) do
     Repo.get_by(Page, notebook_id: notebook.id, date: Date.utc_today())
   end
 
-  def create!(notebook) do
+  def create!(%Notebook{} = notebook) do
     %Page{}
     |> changeset(%{
       identifier: Ecto.UUID.generate(),
@@ -35,16 +35,18 @@ defmodule Onesen.Models.Page do
     |> Repo.insert!()
   end
 
-  def update_content!(page, content) do
+  def update_content!(%Page{} = page, content) do
     page
     |> changeset(%{content: String.trim(content)})
     |> Repo.update!()
   end
 
   @doc false
-  defp changeset(page, attrs) do
+  defp changeset(%Page{} = page, attrs) do
     page
     |> cast(attrs, [:identifier, :date, :content])
     |> validate_required([:identifier, :date])
+    |> unique_constraint(:identifier)
+    |> unique_constraint([:date, :notebook_id])
   end
 end

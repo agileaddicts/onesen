@@ -4,18 +4,18 @@
 
 /* This file is for your main application CSS */
 
-#update-content-form .saved-badge {
+#update-content-form #saved-badge {
   display: inline-block;
 }
 
-#update-content-form .loading-badge {
+#update-content-form #loading-badge {
   display: none;
 }
 
-#update-content-form.phx-change-loading .saved-badge {
+#update-content-form.phx-change-loading #saved-badge {
   display: none;
 }
 
-#update-content-form.phx-change-loading .loading-badge {
+#update-content-form.phx-change-loading #loading-badge {
   display: inline-block;
 }
