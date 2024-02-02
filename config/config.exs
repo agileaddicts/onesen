@@ -14,7 +14,7 @@ config :onesen,
 # Configures the endpoint
 config :onesen, OnesenWeb.Endpoint,
   url: [host: "localhost"],
-  adapter: Phoenix.Endpoint.Cowboy2Adapter,
+  adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: OnesenWeb.ErrorHTML, json: OnesenWeb.ErrorJSON],
     layout: false

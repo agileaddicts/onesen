@@ -1,6 +1,7 @@
 defmodule Onesen.Models.Page do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
 
   alias Onesen.Models.Notebook
   alias Onesen.Models.Page
@@ -22,6 +23,16 @@ defmodule Onesen.Models.Page do
 
   def get_today(%Notebook{} = notebook) do
     Repo.get_by(Page, notebook_id: notebook.id, date: Date.utc_today())
+  end
+
+  def get_random_not_today(%Notebook{} = notebook) do
+    query =
+      from p in Page,
+        where: p.notebook_id == ^notebook.id and p.date != ^Date.utc_today(),
+        order_by: fragment("RANDOM()"),
+        limit: 1
+
+    Repo.one(query)
   end
 
   def create!(%Notebook{} = notebook) do

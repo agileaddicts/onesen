@@ -23,7 +23,8 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
      socket
      |> assign(:page_title, "Your notebook")
      |> assign(:notebook, notebook)
-     |> assign(:page, page)}
+     |> assign(:page, page)
+     |> assign(:random_page, Page.get_random_not_today(notebook))}
   end
 
   @impl true

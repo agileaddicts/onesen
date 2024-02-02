@@ -4,7 +4,7 @@ defmodule Onesen.MixProject do
   def project do
     [
       app: :onesen,
-      version: "0.4.0",
+      version: "0.5.0",
       elixir: "~> 1.16",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -50,7 +50,7 @@ defmodule Onesen.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:plug_cowboy, "~> 2.5"}
+      {:bandit, "~> 1.0"}
     ]
   end
 

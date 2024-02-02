@@ -15,7 +15,7 @@ defmodule Onesen.Test.Models.PageTest do
   end
 
   describe "get_today/1" do
-    test "returns todays page page" do
+    test "returns todays page" do
       notebook = Notebook.create!()
       page = Page.create!(notebook)
       loaded_page = Page.get_today(notebook)
@@ -24,10 +24,25 @@ defmodule Onesen.Test.Models.PageTest do
       assert page.date == Date.utc_today()
     end
 
-    test "throws if page does not exist" do
+    test "returns nil if page does not exist" do
       notebook = Notebook.create!()
 
       assert(Page.get_today(notebook) == nil)
+    end
+  end
+
+  describe "get_random_not_today/1" do
+    test "returns nil if only todays page exists" do
+      notebook = Notebook.create!()
+      Page.create!(notebook)
+
+      assert(Page.get_random_not_today(notebook) == nil)
+    end
+
+    test "returns nil if no pages exist" do
+      notebook = Notebook.create!()
+
+      assert(Page.get_random_not_today(notebook) == nil)
     end
   end
 
