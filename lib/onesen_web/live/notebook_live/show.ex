@@ -11,6 +11,7 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
 
   @impl true
   def handle_params(%{"identifier" => identifier}, _, socket) do
+    IO.inspect(socket)
     notebook = Notebook.get!(identifier)
 
     page =
@@ -24,7 +25,7 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
      |> assign(:page_title, "Your notebook")
      |> assign(:notebook, notebook)
      |> assign(:page, page)
-     |> assign(:random_page, Page.get_random_not_today(notebook))}
+     |> assign_new(:random_page, fn -> Page.get_random_not_today(notebook) end)}
   end
 
   @impl true
