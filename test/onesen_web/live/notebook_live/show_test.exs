@@ -29,6 +29,11 @@ defmodule OnesenWeb.NotebookLiveTest do
     assert loaded_page.content == "Lorem ipsum"
   end
 
+  @tag :skip
+  test "writes content in notebook after disconnect" do
+    nil
+  end
+
   test "displays content in notebook", %{conn: conn, notebook: notebook} do
     page = Page.create!(notebook)
     Page.update_content!(page, "Lorem ipsum")
