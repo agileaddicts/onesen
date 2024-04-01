@@ -11,7 +11,6 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
 
   @impl true
   def handle_params(%{"identifier" => identifier}, _, socket) do
-    IO.inspect(socket)
     notebook = Notebook.get!(identifier)
 
     page =
@@ -45,6 +44,17 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
   @impl true
   def handle_event("update-content", %{"content" => content}, socket) do
     page = Page.update_content!(socket.assigns.page, content)
+
+    {:noreply, socket |> assign(:page, page)}
+  end
+
+  @impl true
+  def handle_event("recover-content", %{"content" => content}, socket) do
+    page =
+      case Page.get_today(socket.assigns.notebook) do
+        nil -> Page.create!(socket.assigns.notebook)
+        page -> Page.update_content!(page, content)
+      end
 
     {:noreply, socket |> assign(:page, page)}
   end
