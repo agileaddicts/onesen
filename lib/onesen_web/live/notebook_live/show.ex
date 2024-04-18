@@ -43,7 +43,12 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
 
   @impl true
   def handle_event("update-content", %{"content" => content}, socket) do
-    page = Page.update_content!(socket.assigns.page, content)
+    page =
+      if socket.assigns.page.date == Date.utc_today() do
+        Page.update_content!(socket.assigns.page, content)
+      else
+        Page.create!(socket.assigns.notebook)
+      end
 
     {:noreply, socket |> assign(:page, page)}
   end
