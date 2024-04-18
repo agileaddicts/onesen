@@ -3,7 +3,6 @@
     "deps/*"
   ],
   "dependencies": {
-    "alpinejs": "^3.13.5",
     "phoenix": "workspace:*",
     "phoenix_html": "workspace:*",
     "phoenix_live_view": "workspace:*",
