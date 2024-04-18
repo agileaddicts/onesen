@@ -1,5 +1,8 @@
-<div class="min-h-screen" x-bind:class="zenMode ? 'bg-gray-900' : 'bg-white'">
-  <header class="" x-show="!zenMode">
+<div class={[
+  "min-h-screen",
+  if(@zen_mode, do: "bg-gray-900", else: "bg-white")
+]}>
+  <header :if={!@zen_mode}>
     <.nav />
   </header>
 
@@ -8,7 +11,7 @@
     <%= @inner_content %>
   </main>
 
-  <footer class="mt-8 bg-gray-900 sm:mt-12" aria-labelledby="footer-heading" x-show="!zenMode">
+  <footer :if={!@zen_mode} class="mt-8 bg-gray-900 sm:mt-12" aria-labelledby="footer-heading">
     <.footer />
   </footer>
 </div>

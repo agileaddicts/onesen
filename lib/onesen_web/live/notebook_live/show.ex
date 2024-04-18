@@ -24,6 +24,7 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
      |> assign(:page_title, notebook.name || "Your notebook")
      |> assign(:notebook, notebook)
      |> assign(:page, page)
+     |> assign(:zen_mode, false)
      |> assign_new(:random_page, fn -> Page.get_random_not_today(notebook) end)}
   end
 
@@ -39,6 +40,11 @@ defmodule OnesenWeb.Live.NotebookLive.Show do
     notebook = Notebook.update_name!(socket.assigns.notebook, name)
 
     {:noreply, socket |> assign(notebook: notebook)}
+  end
+
+  @impl true
+  def handle_event("toggle-zen-mode", _, socket) do
+    {:noreply, socket |> assign(zen_mode: !socket.assigns.zen_mode)}
   end
 
   @impl true
