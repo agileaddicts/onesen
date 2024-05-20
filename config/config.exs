@@ -32,7 +32,7 @@ config :onesen, OnesenWeb.Endpoint,
 config :onesen, Onesen.Mailer, adapter: Swoosh.Adapters.Local
 
 config :bun,
-  version: "1.1.7",
+  version: "1.1.8",
   default: [
     args:
       ~w(build js/app.js --outdir=../priv/static/assets --external /fonts/* --external /images/*),
